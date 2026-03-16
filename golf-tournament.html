@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>6th Annual Duffers Golf Tournament – Englewood Lodge No. 360</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy: #1a2744;
+      --gold: #c8a84b;
+      --gold-light: #e8c96a;
+      --green: #2d5a27;
+      --green-light: #3d7a35;
+      --cream: #f5f0e8;
+      --warm-white: #fdfaf4;
+      --text: #2c2c2c;
+      --text-light: #5a5a5a;
+      --border: #d4c4a0;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Lora', Georgia, serif;
+      background: var(--warm-white);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    /* NAV */
+    nav {
+      background: var(--navy);
+      border-bottom: 2px solid var(--gold);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .nav-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      height: 62px;
+    }
+    .nav-logo {
+      font-family: 'Cinzel', serif;
+      color: var(--gold);
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-decoration: none;
+    }
+    .nav-back {
+      font-family: 'Cinzel', serif;
+      color: var(--cream);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-decoration: none;
+      opacity: 0.8;
+      transition: opacity 0.2s, color 0.2s;
+    }
+    .nav-back:hover { opacity: 1; color: var(--gold); }
+
+    /* HERO */
+    .hero {
+      background: linear-gradient(160deg, #1a3a1a 0%, #2d5a27 40%, #1a2744 100%);
+      padding: 70px 24px 60px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 70% 60% at 50% 120%, rgba(200,168,75,0.15) 0%, transparent 70%),
+        repeating-linear-gradient(
+          -45deg,
+          transparent, transparent 50px,
+          rgba(255,255,255,0.02) 50px, rgba(255,255,255,0.02) 51px
+        );
+      pointer-events: none;
+    }
+    .event-badge {
+      display: inline-block;
+      background: var(--gold);
+      color: var(--navy);
+      font-family: 'Cinzel', serif;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      padding: 6px 18px;
+      border-radius: 2px;
+      margin-bottom: 20px;
+      position: relative;
+    }
+    .hero h1 {
+      font-family: 'Cinzel', serif;
+      color: white;
+      font-size: clamp(2rem, 6vw, 3.4rem);
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 8px;
+      position: relative;
+    }
+    .hero h1 span { color: var(--gold); }
+    .hero-sub {
+      font-family: 'Cinzel', serif;
+      color: rgba(255,255,255,0.7);
+      font-size: 0.9rem;
+      letter-spacing: 0.15em;
+      margin-bottom: 32px;
+      position: relative;
+    }
+    .hero-divider {
+      width: 120px;
+      height: 2px;
+      background: linear-gradient(to right, transparent, var(--gold), transparent);
+      margin: 0 auto 32px;
+    }
+
+    /* KEY DETAILS STRIP */
+    .details-strip {
+      background: var(--navy);
+      border-top: 2px solid var(--gold);
+      border-bottom: 2px solid var(--gold);
+      padding: 20px 24px;
+    }
+    .details-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0;
+    }
+    .detail-item {
+      text-align: center;
+      padding: 10px 24px;
+      border-right: 1px solid rgba(200,168,75,0.3);
+    }
+    .detail-item:last-child { border-right: none; }
+    @media (max-width: 500px) {
+      .detail-item { border-right: none; border-bottom: 1px solid rgba(200,168,75,0.2); padding: 10px 16px; width: 100%; }
+      .detail-item:last-child { border-bottom: none; }
+      .details-inner { flex-direction: column; align-items: center; }
+    }
+    .detail-label {
+      font-family: 'Cinzel', serif;
+      font-size: 0.62rem;
+      letter-spacing: 0.2em;
+      color: var(--gold);
+      opacity: 0.8;
+      margin-bottom: 4px;
+    }
+    .detail-value {
+      font-family: 'Cinzel', serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: white;
+    }
+    @media (max-width: 600px) {
+      .detail-item { border-right: none; padding: 8px 20px; }
+    }
+
+    /* PRICE CALLOUT */
+    .price-hero {
+      text-align: center;
+      margin: 48px 0 12px;
+      position: relative;
+    }
+    .price-starburst {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: var(--gold);
+      color: var(--navy);
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      position: relative;
+      box-shadow: 0 0 0 8px rgba(200,168,75,0.2), 0 0 0 16px rgba(200,168,75,0.1);
+      animation: pulse 2.5s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 0 8px rgba(200,168,75,0.2), 0 0 0 16px rgba(200,168,75,0.08); }
+      50%       { box-shadow: 0 0 0 12px rgba(200,168,75,0.25), 0 0 0 24px rgba(200,168,75,0.1); }
+    }
+    .price-amount {
+      font-family: 'Cinzel', serif;
+      font-size: 2.2rem;
+      font-weight: 700;
+      line-height: 1;
+    }
+    .price-per {
+      font-family: 'Cinzel', serif;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+    }
+
+    /* MAIN CONTENT */
+    .content {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 56px 24px;
+    }
+
+    .section-label {
+      font-family: 'Cinzel', serif;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.25em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    h2 {
+      font-family: 'Cinzel', serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 14px;
+    }
+    .section-rule {
+      width: 50px;
+      height: 3px;
+      background: var(--gold);
+      margin-bottom: 24px;
+    }
+
+    /* SCHEDULE */
+    .schedule {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin-bottom: 48px;
+    }
+    .schedule-item {
+      display: flex;
+      align-items: stretch;
+      gap: 0;
+    }
+    .schedule-time {
+      font-family: 'Cinzel', serif;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--gold);
+      min-width: 120px;
+      padding: 14px 20px 14px 0;
+      text-align: right;
+      border-right: 2px solid var(--gold);
+      position: relative;
+    }
+    .schedule-time::after {
+      content: '';
+      position: absolute;
+      right: -6px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--gold);
+    }
+    .schedule-desc {
+      padding: 14px 0 14px 22px;
+      color: var(--text);
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    /* PERKS GRID */
+    .perks-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+      gap: 16px;
+      margin-bottom: 48px;
+    }
+    .perk-card {
+      background: var(--cream);
+      border: 1px solid var(--border);
+      border-top: 3px solid var(--green);
+      border-radius: 4px;
+      padding: 20px 18px;
+      text-align: center;
+    }
+    .perk-icon {
+      font-size: 1.8rem;
+      margin-bottom: 8px;
+      display: block;
+    }
+    .perk-card h3 {
+      font-family: 'Cinzel', serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 4px;
+    }
+    .perk-card p {
+      font-size: 0.82rem;
+      color: var(--text-light);
+    }
+
+    /* HOLE IN ONE */
+    .hole-in-one {
+      background: var(--navy);
+      border-radius: 6px;
+      padding: 32px 36px;
+      text-align: center;
+      margin-bottom: 48px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hole-in-one::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        45deg,
+        transparent, transparent 20px,
+        rgba(200,168,75,0.04) 20px, rgba(200,168,75,0.04) 21px
+      );
+    }
+    .hole-in-one h3 {
+      font-family: 'Cinzel', serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--gold);
+      margin-bottom: 6px;
+      position: relative;
+    }
+    .hole-in-one p {
+      color: rgba(255,255,255,0.85);
+      font-size: 1.05rem;
+      font-style: italic;
+      position: relative;
+    }
+    .hole-in-one .sponsor {
+      margin-top: 14px;
+      font-family: 'Cinzel', serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      color: var(--gold);
+      opacity: 0.7;
+      position: relative;
+    }
+
+    /* REGISTRATION FORM */
+    .reg-section {
+      background: var(--cream);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 36px;
+      margin-bottom: 48px;
+    }
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 24px;
+    }
+    @media (max-width: 580px) {
+      .form-grid { grid-template-columns: 1fr; }
+    }
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+    .form-group.full { grid-column: 1 / -1; }
+    label {
+      font-family: 'Cinzel', serif;
+      font-size: 0.68rem;
+      letter-spacing: 0.15em;
+      color: var(--navy);
+      font-weight: 700;
+    }
+    input[type="text"], input[type="tel"], input[type="email"] {
+      font-family: 'Lora', serif;
+      font-size: 0.9rem;
+      padding: 10px 12px;
+      border: 1.5px solid var(--border);
+      border-radius: 3px;
+      background: white;
+      color: var(--text);
+      transition: border-color 0.2s;
+      outline: none;
+    }
+    input:focus { border-color: var(--gold); }
+
+    .players-section { margin-top: 24px; }
+    .players-section h3 {
+      font-family: 'Cinzel', serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 16px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+    }
+    .player-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr auto;
+      gap: 12px;
+      align-items: end;
+      margin-bottom: 12px;
+    }
+    @media (max-width: 480px) {
+      .player-row { grid-template-columns: 1fr; }
+    }
+    .player-num {
+      font-family: 'Cinzel', serif;
+      font-size: 0.68rem;
+      color: var(--gold);
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      margin-bottom: 3px;
+    }
+
+    .btn {
+      font-family: 'Cinzel', serif;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      padding: 13px 30px;
+      border-radius: 3px;
+      text-decoration: none;
+      transition: all 0.25s;
+      cursor: pointer;
+      border: none;
+      display: inline-block;
+    }
+    .btn-gold {
+      background: var(--gold);
+      color: var(--navy);
+    }
+    .btn-gold:hover {
+      background: var(--gold-light);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(200,168,75,0.35);
+    }
+    .btn-green {
+      background: var(--green);
+      color: white;
+    }
+    .btn-green:hover {
+      background: var(--green-light);
+      transform: translateY(-2px);
+    }
+
+    /* PAYMENT INFO */
+    .payment-box {
+      background: white;
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--gold);
+      border-radius: 4px;
+      padding: 24px 28px;
+      margin-bottom: 48px;
+    }
+    .payment-box h3 {
+      font-family: 'Cinzel', serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 14px;
+    }
+    .payment-box p {
+      color: var(--text-light);
+      font-size: 0.92rem;
+      line-height: 1.8;
+      margin-bottom: 6px;
+    }
+    .payment-box a { color: var(--gold); text-decoration: none; }
+    .payment-box a:hover { text-decoration: underline; }
+
+    /* SPONSORSHIP */
+    .sponsor-box {
+      background: var(--navy);
+      border-radius: 6px;
+      padding: 32px 36px;
+      margin-bottom: 24px;
+      text-align: center;
+    }
+    .sponsor-box h3 {
+      font-family: 'Cinzel', serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+    .sponsor-box p {
+      color: rgba(255,255,255,0.8);
+      font-size: 0.95rem;
+      margin-bottom: 18px;
+    }
+
+    /* FOOTER */
+    footer {
+      background: #111b30;
+      padding: 24px;
+      text-align: center;
+      border-top: 1px solid rgba(200,168,75,0.2);
+    }
+    footer p {
+      font-family: 'Cinzel', serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      color: rgba(200,168,75,0.5);
+    }
+
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.7s ease forwards;
+    }
+    @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+    .d1 { animation-delay: 0.1s; }
+    .d2 { animation-delay: 0.25s; }
+    .d3 { animation-delay: 0.4s; }
+
+    /* Print styles */
+    @media print {
+      nav, .hero, .details-strip, footer { display: none; }
+      .reg-section { border: 1px solid #999; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">← Englewood Lodge No. 360</a>
+      <span class="nav-back">Fundraising Event</span>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="event-badge fade-in">Englewood Lodge No. 360 Presents</div>
+    <h1 class="fade-in d1">6<sup style="font-size:0.5em; vertical-align:super;">th</sup> Annual<br><span>Duffers Golf</span><br>Tournament</h1>
+    <p class="hero-sub fade-in d2">Saturday, May 16, 2026</p>
+    <div class="hero-divider fade-in d2"></div>
+    <div class="price-hero fade-in d3">
+      <div class="price-starburst">
+        <span class="price-amount">$95</span>
+        <span class="price-per">per player</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- KEY DETAILS STRIP -->
+  <div class="details-strip">
+    <div class="details-inner">
+      <div class="detail-item">
+        <div class="detail-label">Date</div>
+        <div class="detail-value">May 16, 2026</div>
+      </div>
+      <div class="detail-item">
+        <div class="detail-label">Venue</div>
+        <div class="detail-value">Long Marsh Golf Club</div>
+      </div>
+      <div class="detail-item">
+        <div class="detail-label">Address</div>
+        <div class="detail-value">20 White Marsh Rd, Rotonda West</div>
+      </div>
+      <div class="detail-item">
+        <div class="detail-label">Registration</div>
+        <div class="detail-value">7:00 AM</div>
+      </div>
+      <div class="detail-item">
+        <div class="detail-label">Shotgun Start</div>
+        <div class="detail-value">8:00 AM</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div class="content">
+
+    <!-- SCHEDULE -->
+    <div class="section-label">Day of Event</div>
+    <h2>Schedule</h2>
+    <div class="section-rule"></div>
+    <div class="schedule">
+      <div class="schedule-item">
+        <div class="schedule-time">7:00 AM</div>
+        <div class="schedule-desc"><strong>Registration Opens</strong><br>Check in, pick up your cart & swag</div>
+      </div>
+      <div class="schedule-item">
+        <div class="schedule-time">8:00 AM</div>
+        <div class="schedule-desc"><strong>Shotgun Start</strong><br>18 holes, scramble format</div>
+      </div>
+      <div class="schedule-item">
+        <div class="schedule-time">Following</div>
+        <div class="schedule-desc"><strong>BBQ Lunch &amp; Awards Presentation</strong><br>Immediately following the round</div>
+      </div>
+    </div>
+
+    <!-- PERKS -->
+    <div class="section-label">What's Included</div>
+    <h2>Tournament Perks</h2>
+    <div class="section-rule"></div>
+    <div class="perks-grid">
+      <div class="perk-card">
+        <span class="perk-icon">🍖</span>
+        <h3>BBQ Lunch</h3>
+        <p>Full BBQ spread following the round</p>
+      </div>
+      <div class="perk-card">
+        <span class="perk-icon">🏆</span>
+        <h3>Awards</h3>
+        <p>Prizes &amp; ceremony after lunch</p>
+      </div>
+      <div class="perk-card">
+        <span class="perk-icon">🎯</span>
+        <h3>Golf Ball Shoot</h3>
+        <p>AR golf ball shoot competition</p>
+      </div>
+      <div class="perk-card">
+        <span class="perk-icon">🎟️</span>
+        <h3>Raffles</h3>
+        <p>Great raffle prizes throughout the day</p>
+      </div>
+      <div class="perk-card">
+        <span class="perk-icon">🍺</span>
+        <h3>Beverages</h3>
+        <p>Free beer, soda &amp; water all day</p>
+      </div>
+    </div>
+
+    <!-- HOLE IN ONE -->
+    <div class="hole-in-one">
+      <h3>⛳ Hole-in-One Contest</h3>
+      <p>Sink a hole-in-one and <strong style="color:var(--gold-light);">win a brand new Ford vehicle!</strong></p>
+      <div class="sponsor">Courtesy of Englewood Ford</div>
+    </div>
+
+    <!-- REGISTRATION FORM -->
+    <div class="reg-section" id="register">
+      <div class="section-label">Sign Up</div>
+      <h2 style="margin-bottom:4px;">Team Registration</h2>
+      <div class="section-rule"></div>
+      <p style="color:var(--text-light); font-size:0.92rem; margin-bottom:8px;">Register your team of 4 below, then mail or email your completed form with payment.</p>
+
+      <div class="form-grid">
+        <div class="form-group full">
+          <label>Team Name / Contact</label>
+          <input type="text" placeholder="Team name or contact person" />
+        </div>
+      </div>
+
+      <div class="players-section">
+        <h3>Players</h3>
+        <div class="player-row">
+          <div class="form-group">
+            <div class="player-num">Player 1</div>
+            <input type="text" placeholder="Full name" />
+          </div>
+          <div class="form-group">
+            <label>Phone</label>
+            <input type="tel" placeholder="(941) 000-0000" />
+          </div>
+        </div>
+        <div class="player-row">
+          <div class="form-group">
+            <div class="player-num">Player 2</div>
+            <input type="text" placeholder="Full name" />
+          </div>
+          <div class="form-group">
+            <label>Phone</label>
+            <input type="tel" placeholder="(941) 000-0000" />
+          </div>
+        </div>
+        <div class="player-row">
+          <div class="form-group">
+            <div class="player-num">Player 3</div>
+            <input type="text" placeholder="Full name" />
+          </div>
+          <div class="form-group">
+            <label>Phone</label>
+            <input type="tel" placeholder="(941) 000-0000" />
+          </div>
+        </div>
+        <div class="player-row">
+          <div class="form-group">
+            <div class="player-num">Player 4</div>
+            <input type="text" placeholder="Full name" />
+          </div>
+          <div class="form-group">
+            <label>Phone</label>
+            <input type="tel" placeholder="(941) 000-0000" />
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top:28px; display:flex; gap:12px; flex-wrap:wrap;">
+        <button class="btn btn-green" style="min-height:52px;" onclick="sendGolfEmail()">📧 &nbsp;Email Registration</button>
+        <button class="btn btn-gold" style="min-height:52px;" onclick="window.print()">🖨️ &nbsp;Print Form</button>
+      </div>
+      <p style="margin-top:10px; font-size:0.8rem; color:var(--text-light); font-style:italic;">Email button opens your mail app with team info pre-filled.</p>
+    </div>
+
+    <!-- PAYMENT -->
+    <div class="payment-box">
+      <h3>Payment &amp; Submission</h3>
+      <p><strong>Checks payable to:</strong> Englewood Masonic Lodge #360</p>
+      <p><strong>Mail to:</strong> 450 Manth St, Port Charlotte, FL 33953</p>
+      <p><strong>Email:</strong>
+        <a href="mailto:dmashia@drmelectric.com">dmashia@drmelectric.com</a> or
+        <a href="mailto:Karenann@odessaanimalsanctuary.org">Karenann@odessaanimalsanctuary.org</a>
+      </p>
+    </div>
+
+    <!-- SPONSORSHIP -->
+    <div class="sponsor-box">
+      <h3>Become a Sponsor</h3>
+      <p>Sponsorship opportunities start at $150. Contact us for details on hole sponsorships, prize sponsorships, and more.</p>
+      <a href="mailto:dmashia@drmelectric.com" class="btn btn-gold">Inquire About Sponsorship</a>
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>Englewood Masonic Lodge No. 360, F.&amp;A.M. &nbsp;·&nbsp; Englewood, Florida &nbsp;·&nbsp; <a href="index.html" style="color:rgba(200,168,75,0.6);">Back to Lodge Home</a></p>
+  </footer>
+
+  <script>
+    function sendGolfEmail() {
+      const team = document.querySelector('.reg-section input[placeholder="Team name or contact person"]').value.trim();
+      const players = document.querySelectorAll('.player-row');
+      let playerLines = '';
+      let num = 1;
+      players.forEach(row => {
+        const name  = row.querySelectorAll('input')[0]?.value.trim() || '';
+        const phone = row.querySelectorAll('input')[1]?.value.trim() || '';
+        if (name || phone) playerLines += 'Player ' + num + ': ' + (name || '—') + '  |  Phone: ' + (phone || '—') + '\n';
+        num++;
+      });
+      const subject = '6th Annual Duffers Golf Tournament – Team Registration' + (team ? ': ' + team : '');
+      const body =
+        '6TH ANNUAL DUFFERS GOLF TOURNAMENT – TEAM REGISTRATION\n' +
+        '--------------------------------------------------------\n\n' +
+        'Team Name / Contact: ' + (team || '—') + '\n\n' +
+        'Players:\n' + (playerLines || '(no players entered)\n') + '\n' +
+        '--------------------------------------------------------\n' +
+        'Cost: $95 per player\n' +
+        'Checks payable to: Englewood Masonic Lodge #360\n' +
+        'Mail to: 450 Manth St, Port Charlotte, FL 33953\n';
+      window.location.href =
+        'mailto:dmashia@drmelectric.com?cc=Karenann@odessaanimalsanctuary.org' +
+        '&subject=' + encodeURIComponent(subject) +
+        '&body='    + encodeURIComponent(body);
+    }
+  </script>
+</body>
+</html>
