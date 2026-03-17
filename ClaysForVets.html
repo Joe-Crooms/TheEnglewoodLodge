@@ -850,6 +850,16 @@
         <a href="tel:9418301249">941-830-1249</a> &nbsp;·&nbsp;
         <a href="mailto:claysforvets@gmail.com">claysforvets@gmail.com</a>
       </p>
+
+      <div style="margin-top:24px; padding-top:20px; border-top:1px solid var(--border); text-align:center;">
+        <p style="font-family:'Cinzel',serif; font-size:0.72rem; font-weight:700; letter-spacing:0.15em; color:var(--navy); margin-bottom:14px;">PAY ONLINE</p>
+        <a href="https://link.clover.com/urlshortener/qST8g7" target="_blank" rel="noopener"
+           style="display:inline-flex; align-items:center; justify-content:center; gap:10px; background:var(--purple); color:white; font-family:'Cinzel',serif; font-size:0.88rem; font-weight:700; letter-spacing:0.08em; padding:16px 28px; border-radius:4px; text-decoration:none; min-height:52px; margin-bottom:20px; -webkit-tap-highlight-color:transparent;">
+          💳 &nbsp;Tap to Pay Now
+        </a>
+        <p style="font-family:'Cinzel',serif; font-size:0.68rem; letter-spacing:0.12em; color:var(--text-light); margin-bottom:12px;">— or scan to pay —</p>
+        <img src="clays-qr.png" alt="Scan to pay" style="width:180px; height:180px; border:3px solid var(--border); border-radius:6px; display:block; margin:0 auto;" />
+      </div>
     </div>
 
   </div>
@@ -860,7 +870,7 @@
     <p><a href="index.html" style="color:rgba(200,168,75,0.6);">← Back to Lodge Home</a></p>
   </footer>
 
-  <script>
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
     function showTab(type) {
       document.querySelectorAll('.reg-tab').forEach((t, i) => {
         t.classList.toggle('active', ['individual','team','sponsor'][i] === type);
@@ -914,13 +924,4 @@
       }
 
       body += '\n==========================================\n';
-      body += 'Payment: Cash, Check (Phil Fessenden Memorial Fund), or Zelle 941-830-1249\n';
-
-      window.location.href = 'mailto:claysforvets@gmail.com'
-        + '?subject=' + encodeURIComponent(subject)
-        + '&body='    + encodeURIComponent(body);
-    }
-  </script>
-
-</body>
-</html>
+      body += 'Payment: Cash, Check (Phil Fe
