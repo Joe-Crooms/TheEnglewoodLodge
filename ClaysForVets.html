@@ -848,7 +848,7 @@
       <p><strong>Mail to:</strong> 9442 Casa Grande Ave, Englewood, FL 34224-8007</p>
       <p style="margin-top:10px;"><strong>Contact:</strong> Denis Doome &nbsp;·&nbsp;
         <a href="tel:9418301249">941-830-1249</a> &nbsp;·&nbsp;
-        <a href="mailto:claysforvets@gmail.com">claysforvets@gmail.com</a>
+        <a href="/cdn-cgi/l/email-protection#1f7c737e666c79706d697a6b6c5f78727e7673317c7072"><span class="__cf_email__" data-cfemail="26454a475f554049545043525566414b474f4a0845494b">[email&#160;protected]</span></a>
       </p>
 
       <div style="margin-top:24px; padding-top:20px; border-top:1px solid var(--border); text-align:center;">
@@ -858,7 +858,19 @@
           💳 &nbsp;Tap to Pay Now
         </a>
         <p style="font-family:'Cinzel',serif; font-size:0.68rem; letter-spacing:0.12em; color:var(--text-light); margin-bottom:12px;">— or scan to pay —</p>
-        <img src="clays-qr.jpg" alt="Scan to pay" style="width:180px; height:180px; border:3px solid var(--border); border-radius:6px; display:block; margin:0 auto;" />
+        <div id="qrcode" style="display:flex; justify-content:center; margin:0 auto;"></div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+        <script>
+          new QRCode(document.getElementById('qrcode'), {
+            text: 'https://link.clover.com/urlshortener/qST8g7',
+            width: 180,
+            height: 180,
+            colorDark: '#000000',
+            colorLight: '#ffffff',
+            correctLevel: QRCode.CorrectLevel.H
+          });
+          document.getElementById('qrcode').querySelector('img').style.cssText = 'border:3px solid #d4c4a0; border-radius:6px;';
+        </script>
       </div>
     </div>
 
@@ -870,7 +882,7 @@
     <p><a href="index.html" style="color:rgba(200,168,75,0.6);">← Back to Lodge Home</a></p>
   </footer>
 
-  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
     function showTab(type) {
       document.querySelectorAll('.reg-tab').forEach((t, i) => {
         t.classList.toggle('active', ['individual','team','sponsor'][i] === type);
@@ -918,10 +930,4 @@
         let shooters = '';
         ['sp-s1','sp-s2','sp-s3','sp-s4'].forEach((id, i) => {
           const v = document.getElementById(id).value.trim();
-          if (v) shooters += '  Shooter ' + (i+1) + ': ' + v + '\n';
-        });
-        if (shooters) body += 'Included Shooters:\n' + shooters;
-      }
-
-      body += '\n==========================================\n';
-      body += 'Payment: Cash, Check (Phil Fe
+          if (
