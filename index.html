@@ -821,21 +821,30 @@
     <p>Under the Grand Lodge of Florida &nbsp;·&nbsp; District 23</p>
   </footer>
 
-  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+  <script>
     // Hamburger
     const hamburger = document.getElementById('hamburger');
     const mobileMenu = document.getElementById('mobileMenu');
-    hamburger.addEventListener('click', () => {
-      hamburger.classList.toggle('open');
-      mobileMenu.classList.toggle('open');
-    });
+
     function closeMenu() {
       hamburger.classList.remove('open');
       mobileMenu.classList.remove('open');
     }
+
+    hamburger.addEventListener('click', (e) => {
+      e.stopPropagation();
+      hamburger.classList.toggle('open');
+      mobileMenu.classList.toggle('open');
+    });
+
     document.addEventListener('click', (e) => {
       if (!hamburger.contains(e.target) && !mobileMenu.contains(e.target)) closeMenu();
     });
+
+    document.addEventListener('touchstart', (e) => {
+      if (!hamburger.contains(e.target) && !mobileMenu.contains(e.target)) closeMenu();
+    }, { passive: true });
 
     // Mailto
     function sendEmail() {
