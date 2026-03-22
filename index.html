@@ -821,7 +821,6 @@
     <p>Under the Grand Lodge of Florida &nbsp;·&nbsp; District 23</p>
   </footer>
 
-  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
   <script>
     // Hamburger
     const hamburger = document.getElementById('hamburger');
@@ -832,19 +831,46 @@
       mobileMenu.classList.remove('open');
     }
 
-    hamburger.addEventListener('click', (e) => {
+    hamburger.addEventListener('click', function(e) {
       e.stopPropagation();
       hamburger.classList.toggle('open');
       mobileMenu.classList.toggle('open');
     });
 
-    document.addEventListener('click', (e) => {
-      if (!hamburger.contains(e.target) && !mobileMenu.contains(e.target)) closeMenu();
+    document.addEventListener('click', function(e) {
+      if (mobileMenu.classList.contains('open') &&
+          !hamburger.contains(e.target) &&
+          !mobileMenu.contains(e.target)) {
+        closeMenu();
+      }
     });
+  </script>
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+  <script>
 
-    document.addEventListener('touchstart', (e) => {
-      if (!hamburger.contains(e.target) && !mobileMenu.contains(e.target)) closeMenu();
-    }, { passive: true });
+    // Filter past events
+    (function() {
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      const cards = document.querySelectorAll('.events-grid .event-card');
+      const pastGrid = document.getElementById('past-grid');
+      const pastSection = document.getElementById('past-fundraisers-section');
+
+      cards.forEach(function(card) {
+        const dateStr = card.getAttribute('data-date');
+        if (!dateStr) return;
+        const cardDate = new Date(dateStr + 'T00:00:00');
+        if (cardDate < today) {
+          if (card.getAttribute('data-fundraiser') === '1') {
+            const pastCard = card.cloneNode(true);
+            pastCard.classList.add('past-card');
+            pastGrid.appendChild(pastCard);
+            pastSection.style.display = '';
+          }
+          card.remove();
+        }
+      });
+    })();
 
     // Mailto
     function sendEmail() {
