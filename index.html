@@ -876,4 +876,13 @@
     function sendEmail() {
       const name    = document.getElementById('contactName').value.trim();
       const subject = document.getElementById('contactSubject').value;
-      const message = document.getElementById(
+      const message = document.getElementById('contactMessage').value.trim();
+      const body    = (name ? 'From: ' + name + '\n\n' : '') + message;
+      window.location.href = 'mailto:englewood360@gmail.com'
+        + '?subject=' + encodeURIComponent(subject)
+        + '&body='    + encodeURIComponent(body);
+    }
+  </script>
+
+</body>
+</html>
