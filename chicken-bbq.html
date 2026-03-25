@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Chicken BBQ Pre-Registration – Englewood Lodge No. 360</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy: #1a2744;
+      --gold: #c8a84b;
+      --gold-light: #e8c96a;
+      --red: #8b2020;
+      --cream: #f5f0e8;
+      --warm-white: #fdfaf4;
+      --text: #2c2c2c;
+      --text-light: #5a5a5a;
+      --border: #d4c4a0;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Lora', Georgia, serif; background: var(--warm-white); color: var(--text); overflow-x: hidden; }
+
+    /* NAV */
+    nav { background: var(--navy); border-bottom: 2px solid var(--gold); position: sticky; top: 0; z-index: 100; }
+    .nav-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 0 24px; height: 62px; }
+    .nav-logo { font-family: 'Cinzel', serif; color: var(--gold); font-size: 0.9rem; font-weight: 700; letter-spacing: 0.05em; text-decoration: none; }
+    .nav-back { font-family: 'Cinzel', serif; color: var(--cream); font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em; text-decoration: none; opacity: 0.8; transition: opacity 0.2s, color 0.2s; }
+    .nav-back:hover { opacity: 1; color: var(--gold); }
+
+    /* HERO */
+    .hero { background: linear-gradient(160deg, #3a1a0a 0%, #6b2010 40%, #1a2744 100%); padding: 70px 24px 60px; text-align: center; position: relative; overflow: hidden; }
+    .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 70% 60% at 50% 120%, rgba(200,168,75,0.18) 0%, transparent 70%), repeating-linear-gradient(-45deg, transparent, transparent 50px, rgba(255,255,255,0.015) 50px, rgba(255,255,255,0.015) 51px); pointer-events: none; }
+    .event-badge { display: inline-block; background: var(--gold); color: var(--navy); font-family: 'Cinzel', serif; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.2em; padding: 6px 18px; border-radius: 2px; margin-bottom: 20px; position: relative; }
+    .hero h1 { font-family: 'Cinzel', serif; color: white; font-size: clamp(2rem, 6vw, 3.2rem); font-weight: 700; line-height: 1.12; margin-bottom: 8px; position: relative; }
+    .hero h1 span { color: var(--gold); }
+    .hero-sub { font-family: 'Cinzel', serif; color: rgba(255,255,255,0.7); font-size: 0.9rem; letter-spacing: 0.15em; margin-bottom: 32px; position: relative; }
+    .hero-divider { width: 120px; height: 2px; background: linear-gradient(to right, transparent, var(--gold), transparent); margin: 0 auto 32px; }
+    .price-starburst { display: inline-flex; flex-direction: column; align-items: center; justify-content: center; background: var(--gold); color: var(--navy); width: 130px; height: 130px; border-radius: 50%; box-shadow: 0 0 0 8px rgba(200,168,75,0.2), 0 0 0 16px rgba(200,168,75,0.1); animation: pulse 2.5s ease-in-out infinite; }
+    @keyframes pulse { 0%,100% { box-shadow: 0 0 0 8px rgba(200,168,75,0.2), 0 0 0 16px rgba(200,168,75,0.08); } 50% { box-shadow: 0 0 0 12px rgba(200,168,75,0.25), 0 0 0 24px rgba(200,168,75,0.1); } }
+    .price-amount { font-family: 'Cinzel', serif; font-size: 2.2rem; font-weight: 700; line-height: 1; }
+    .price-per    { font-family: 'Cinzel', serif; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em; }
+
+    /* DETAILS STRIP */
+    .details-strip { background: var(--navy); border-top: 2px solid var(--gold); border-bottom: 2px solid var(--gold); padding: 20px 24px; }
+    .details-inner { max-width: 900px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: center; }
+    .detail-item { text-align: center; padding: 10px 24px; border-right: 1px solid rgba(200,168,75,0.3); }
+    .detail-item:last-child { border-right: none; }
+    @media (max-width: 500px) { .detail-item { border-right: none; border-bottom: 1px solid rgba(200,168,75,0.2); padding: 10px 16px; width: 100%; } .detail-item:last-child { border-bottom: none; } .details-inner { flex-direction: column; align-items: center; } }
+    .detail-label { font-family: 'Cinzel', serif; font-size: 0.62rem; letter-spacing: 0.2em; color: var(--gold); opacity: 0.8; margin-bottom: 4px; }
+    .detail-value { font-family: 'Cinzel', serif; font-size: 0.95rem; font-weight: 700; color: white; }
+
+    /* CONTENT */
+    .content { max-width: 900px; margin: 0 auto; padding: 56px 24px; }
+    .section-label { font-family: 'Cinzel', serif; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.25em; color: var(--gold); text-transform: uppercase; margin-bottom: 6px; }
+    h2 { font-family: 'Cinzel', serif; font-size: 1.6rem; font-weight: 700; color: var(--navy); margin-bottom: 14px; }
+    .section-rule { width: 50px; height: 3px; background: var(--gold); margin-bottom: 24px; }
+
+    /* PERKS */
+    .perks-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 14px; margin-bottom: 48px; }
+    .perk-card { background: var(--cream); border: 1px solid var(--border); border-radius: 6px; padding: 22px 16px; text-align: center; position: relative; overflow: hidden; }
+    .perk-card::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px; background: var(--red); }
+    .perk-icon { font-size: 1.8rem; display: block; margin-bottom: 10px; }
+    .perk-card h3 { font-family: 'Cinzel', serif; font-size: 0.88rem; font-weight: 700; color: var(--navy); margin-bottom: 6px; }
+    .perk-card p  { font-size: 0.85rem; color: var(--text-light); line-height: 1.55; }
+
+    /* EVENT SELECTOR */
+    .ev-card { border: 2px solid var(--border); border-radius: 6px; padding: 16px 20px; cursor: pointer; transition: border-color 0.2s, background 0.2s; background: white; display: flex; align-items: center; gap: 14px; }
+    .ev-card:hover { border-color: var(--gold); }
+    .ev-card.selected { border-color: var(--gold); background: rgba(200,168,75,0.06); }
+    .ev-check { width: 18px; height: 18px; border: 2px solid var(--border); border-radius: 50%; flex-shrink: 0; transition: all 0.2s; display: flex; align-items: center; justify-content: center; }
+    .ev-card.selected .ev-check { border-color: var(--gold); background: var(--gold); }
+    .ev-card.selected .ev-check::after { content: ''; width: 6px; height: 6px; background: white; border-radius: 50%; display: block; }
+    .ev-card.ev-closed { cursor: default; opacity: 0.85; }
+    .ev-card.ev-closed:hover { border-color: var(--border); background: white; }
+    .ev-sub   { font-size: 0.82rem; color: var(--text-light); }
+
+    /* REGISTRATION */
+    .reg-section { background: var(--cream); border: 1px solid var(--border); border-top: 4px solid var(--red); border-radius: 6px; padding: 32px 28px; margin-bottom: 32px; }
+    @media (max-width: 480px) { .reg-section { padding: 22px 16px; } }
+
+    /* INFO BOX */
+    .info-box { background: rgba(200,168,75,0.08); border: 1px solid rgba(200,168,75,0.4); border-left: 4px solid var(--gold); border-radius: 4px; padding: 16px 18px; margin-bottom: 20px; font-size: 0.9rem; color: var(--text-light); line-height: 1.7; }
+    .info-box strong { color: var(--navy); }
+
+    /* REMINDER NOTICE */
+    .reminder-notice { background: rgba(26,39,68,0.05); border: 1px solid rgba(26,39,68,0.18); border-radius: 6px; padding: 18px 20px; margin-bottom: 22px; font-size: 0.88rem; color: var(--text-light); display: flex; gap: 12px; align-items: flex-start; }
+    .reminder-notice .bell { font-size: 1.3rem; flex-shrink: 0; margin-top: 2px; }
+    .reminder-notice strong { color: var(--navy); display: block; margin-bottom: 3px; font-family: 'Cinzel', serif; font-size: 0.8rem; letter-spacing: 0.1em; }
+
+    /* FORM EMBED */
+    .form-wrap { background: white; border: 1px solid var(--border); border-radius: 6px; overflow: hidden; }
+    .form-placeholder { padding: 48px 24px; text-align: center; color: var(--text-light); }
+    .form-placeholder .fp-icon { font-size: 2.2rem; margin-bottom: 12px; }
+    .form-placeholder h3 { font-family: 'Cinzel', serif; font-size: 0.9rem; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
+    .form-placeholder p { font-size: 0.85rem; line-height: 1.65; margin-bottom: 6px; }
+    .form-placeholder a { color: var(--red); font-weight: 600; }
+    .form-placeholder .hint { font-size: 0.78rem; color: #bbb; font-style: italic; margin-top: 10px; }
+
+    /* FOOTER */
+    footer { background: #111b30; padding: 24px 20px; text-align: center; border-top: 1px solid rgba(200,168,75,0.2); }
+    footer p { font-family: 'Cinzel', serif; font-size: 0.7rem; letter-spacing: 0.08em; color: rgba(200,168,75,0.5); line-height: 1.9; }
+    footer a { color: rgba(200,168,75,0.6); text-decoration: none; }
+
+    .fade-in { opacity: 0; transform: translateY(20px); animation: fadeUp 0.7s ease forwards; }
+    @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+    .d1 { animation-delay: 0.1s; } .d2 { animation-delay: 0.25s; } .d3 { animation-delay: 0.4s; }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">← Englewood Lodge No. 360</a>
+      <span class="nav-back">Community Event</span>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="event-badge fade-in">Englewood Lodge No. 360 Presents</div>
+    <h1 class="fade-in d1">🍗 <span>Chicken BBQ</span><br>Community Dinner</h1>
+    <p class="hero-sub fade-in d2" id="heroSubDate">Loading dates…</p>
+    <div class="hero-divider fade-in d2"></div>
+    <div style="text-align:center;" class="fade-in d3">
+      <div class="price-starburst">
+        <span class="price-amount">$15</span>
+        <span class="price-per">per plate</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="details-strip">
+    <div class="details-inner" id="detailsStrip"></div>
+  </div>
+
+  <div class="content">
+
+    <div class="section-label">The Meal</div>
+    <h2>What's on the Menu</h2>
+    <div class="section-rule"></div>
+    <div class="perks-grid">
+      <div class="perk-card"><span class="perk-icon">🍗</span><h3>BBQ Chicken</h3><p>Slow-smoked, fall-off-the-bone chicken quarters</p></div>
+      <div class="perk-card"><span class="perk-icon">🥗</span><h3>Sides</h3><p>Classic Southern sides served fresh</p></div>
+      <div class="perk-card"><span class="perk-icon">🫙</span><h3>All Proceeds</h3><p>Support Lodge charitable programs &amp; community relief</p></div>
+      <div class="perk-card"><span class="perk-icon">🕙</span><h3>Pickup Window</h3><p>11:30 AM – 1:00 PM · 265 Pine St, Englewood</p></div>
+    </div>
+
+    <div class="info-box" style="margin-bottom:36px;">
+      <strong>Pre-registration helps us plan.</strong> By registering in advance you guarantee your plate and help us buy the right amount of food. Walk-ins welcome while supplies last, but <strong>pre-registered guests are guaranteed their order.</strong>
+    </div>
+
+    <div class="section-label">Upcoming Dates</div>
+    <h2>Choose Your BBQ</h2>
+    <div class="section-rule"></div>
+    <div id="eventSelector" style="display:grid; gap:12px; margin-bottom:16px;"></div>
+
+    <!-- LIVE COUNT DISPLAY -->
+    <div id="liveCountWrap" style="margin-bottom:40px; display:none;">
+      <div style="background:#1a2744; border-radius:6px; padding:18px 20px;">
+        <div style="font-family:'Cinzel',serif; font-size:0.65rem; letter-spacing:0.2em; color:#c8a84b; opacity:0.8; margin-bottom:12px; text-transform:uppercase;">Pre-Registration Count — Live</div>
+        <div id="liveCountGrid" style="display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:12px;"></div>
+        <div style="margin-top:10px; font-size:0.75rem; color:rgba(255,255,255,0.35); font-style:italic;">Updates each time the page loads</div>
+      </div>
+    </div>
+
+    <div class="reg-section" id="register">
+      <div class="section-label">Pre-Registration</div>
+      <h2 style="margin-bottom:4px;">Reserve Your Plates</h2>
+      <div class="section-rule"></div>
+      <p style="color:var(--text-light); font-size:0.92rem; margin-bottom:20px;">Fill out the form below to reserve your plates. You'll receive a confirmation and a reminder email the evening before the event.</p>
+
+      <div class="info-box">
+        💳 <strong>Payment at the Door</strong> — We accept <strong>cash, check, or card</strong> on the day of the event. Checks payable to <strong>Englewood Masonic Lodge #360</strong>.
+      </div>
+
+      <div class="reminder-notice">
+        <span class="bell">🔔</span>
+        <div>
+          <strong>Automatic Day-Before Reminder</strong>
+          After registering you'll receive a confirmation email, plus an automatic reminder the evening before your BBQ with full event details. Make sure your email address is entered correctly in the form.
+        </div>
+      </div>
+
+      <div class="form-wrap">
+        <div class="form-placeholder" id="formPlaceholder">
+          <div class="fp-icon">📋</div>
+          <h3>Registration Form</h3>
+          <p>Can't see the form? <a id="formDirectLink" href="#" target="_blank" rel="noopener">Open it directly →</a></p>
+          <p class="hint">Setup needed: paste your Google Form embed URL into<br><code>GOOGLE_FORM_URL</code> near the top of the page's script.</p>
+        </div>
+        <iframe id="googleFormIframe" src="" width="100%" height="980" frameborder="0" marginheight="0" marginwidth="0" style="display:none;"></iframe>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    <p>Englewood Masonic Lodge No. 360, F.&amp;A.M. &nbsp;·&nbsp; Englewood, Florida &nbsp;·&nbsp; <a href="index.html">Back to Lodge Home</a></p>
+  </footer>
+
+  <script>
+    // ══════════════════════════════════════════════════════════
+    //  SETUP — only these two sections need to be edited
+    // ══════════════════════════════════════════════════════════
+
+    // 1. Paste your Google Form embed URL here after creating the form.
+    //    It looks like: https://docs.google.com/forms/d/e/XXXX/viewform?embedded=true
+    const GOOGLE_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSeJRgaOaURbWlUFXYHxZwKoJZyXv0ErqikgERUtiYb6rYV8MQ/viewform?embedded=true';
+
+    // 2. Add or remove BBQ dates (YYYY-MM-DD). Past dates hide automatically.
+    const BBQ_EVENTS = [
+      { date: '2026-03-22', label: 'Sunday, March 22, 2026' },
+      { date: '2026-04-12', label: 'Sunday, April 12, 2026' },
+      // { date: '2026-05-10', label: 'Sunday, May 10, 2026' },
+    ];
+
+    // 4. Google Form pre-fill entry ID for the Event Date field
+    const DATE_ENTRY_ID = 'entry.2049053534';
+    const COUNT_URL = 'https://script.google.com/macros/s/AKfycbxufHeXQYbvUdRJULW4mfSoFG3-XAJ40WgoYEoExWYBAkNxbqOvJXQiFjGDWPciUYSV/exec';
+
+    // 3. Registration cutoff — number of days before the event to lock the form.
+    //    Default is 4 days (Wednesday cutoff for a Sunday event).
+    const CUTOFF_DAYS = 4;
+
+    // ══════════════════════════════════════════════════════════
+
+    function getFutureEvents() {
+      const today = new Date(); today.setHours(0,0,0,0);
+      return BBQ_EVENTS.filter(ev => {
+        const [y,m,d] = ev.date.split('-').map(Number);
+        return new Date(y, m-1, d) >= today;
+      });
+    }
+
+    function getRegistrationStatus(dateStr) {
+      // Returns: 'open', 'closed', or 'past'
+      const today = new Date(); today.setHours(0,0,0,0);
+      const [y,m,d] = dateStr.split('-').map(Number);
+      const eventDate  = new Date(y, m-1, d);
+      const cutoffDate = new Date(eventDate);
+      cutoffDate.setDate(cutoffDate.getDate() - CUTOFF_DAYS); // Wednesday
+
+      if (today > eventDate) return 'past';
+      if (today > cutoffDate) return 'closed';
+      return 'open';
+    }
+
+    async function fetchLiveCounts() {
+      const wrap = document.getElementById('liveCountWrap');
+      const grid = document.getElementById('liveCountGrid');
+      const future = getFutureEvents();
+      if (!future.length || !COUNT_URL) return;
+
+      try {
+        const res  = await fetch(COUNT_URL);
+        const data = await res.json();
+
+        // Build a card for each future event
+        grid.innerHTML = future.map(ev => {
+          const counts = data[ev.label] || { registrations: 0, plates: 0 };
+          return `
+            <div style="background:rgba(255,255,255,0.07); border-radius:4px; padding:14px 16px; text-align:center;">
+              <div style="font-family:'Cinzel',serif; font-size:0.7rem; color:#c8a84b; letter-spacing:0.1em; margin-bottom:8px; line-height:1.4;">${ev.label}</div>
+              <div style="display:flex; justify-content:center; gap:20px;">
+                <div>
+                  <div style="font-family:'Cinzel',serif; font-size:1.6rem; font-weight:700; color:white; line-height:1;">${counts.registrations}</div>
+                  <div style="font-size:0.72rem; color:rgba(255,255,255,0.45); margin-top:3px;">registrations</div>
+                </div>
+                <div style="width:1px; background:rgba(255,255,255,0.1);"></div>
+                <div>
+                  <div style="font-family:'Cinzel',serif; font-size:1.6rem; font-weight:700; color:#c8a84b; line-height:1;">${counts.plates}</div>
+                  <div style="font-size:0.72rem; color:rgba(255,255,255,0.45); margin-top:3px;">plates</div>
+                </div>
+              </div>
+            </div>`;
+        }).join('');
+
+        wrap.style.display = 'block';
+      } catch(err) {
+        // Silently fail — counts just won't show if fetch errors
+        console.log('Count fetch failed:', err);
+      }
+    }
+
+    function buildHeroDetails() {
+      const future = getFutureEvents();
+      if (!future.length) {
+        document.getElementById('heroSubDate').textContent = 'Check Back for Upcoming Dates';
+        document.getElementById('detailsStrip').innerHTML = '<div class="detail-item"><div class="detail-label">Status</div><div class="detail-value">No Upcoming Events</div></div>';
+        return;
+      }
+      const next = future[0];
+      document.getElementById('heroSubDate').textContent = next.label;
+      document.getElementById('detailsStrip').innerHTML = `
+        <div class="detail-item"><div class="detail-label">Next Date</div><div class="detail-value">${next.label}</div></div>
+        <div class="detail-item"><div class="detail-label">Time</div><div class="detail-value">11:30 AM – 1:00 PM</div></div>
+        <div class="detail-item"><div class="detail-label">Location</div><div class="detail-value">265 Pine St, Englewood, FL</div></div>
+        <div class="detail-item"><div class="detail-label">Donation</div><div class="detail-value">$15 per Plate</div></div>
+      `;
+    }
+
+    function buildEventCards() {
+      const container = document.getElementById('eventSelector');
+      const future = getFutureEvents();
+      if (!future.length) {
+        container.innerHTML = '<p style="color:var(--text-light);font-style:italic;">No upcoming BBQ events scheduled. Check back soon!</p>';
+        return;
+      }
+      container.innerHTML = future.map((ev, i) => {
+        const status = getRegistrationStatus(ev.date);
+        const isClosed = status === 'closed';
+        const badge = isClosed
+          ? `<span style="font-family:'Cinzel',serif;font-size:0.65rem;font-weight:700;letter-spacing:0.12em;background:#8b2020;color:white;padding:3px 10px;border-radius:2px;margin-left:8px;">REGISTRATION CLOSED</span>`
+          : `<span style="font-family:'Cinzel',serif;font-size:0.65rem;font-weight:700;letter-spacing:0.12em;background:#2d6a2d;color:white;padding:3px 10px;border-radius:2px;margin-left:8px;">OPEN</span>`;
+        return `
+        <div class="ev-card ${i===0?'selected':''} ${isClosed?'ev-closed':''}" id="evcard-${i}" onclick="selectEvent(${i})">
+          <div class="ev-check"></div>
+          <div style="font-size:1.5rem;flex-shrink:0;">📅</div>
+          <div style="flex:1;">
+            <div class="ev-title" style="${isClosed?'opacity:0.5;':''}">
+              ${ev.label}${badge}
+            </div>
+            <div class="ev-sub" style="${isClosed?'opacity:0.5;':''}">11:30 AM – 1:00 PM &nbsp;·&nbsp; 265 Pine St, Englewood, FL</div>
+            ${isClosed ? `<div style="font-size:0.8rem;color:#8b2020;margin-top:4px;font-style:italic;">Registration closed Wednesday. Walk-ins welcome while supplies last.</div>` : ''}
+          </div>
+        </div>`;
+      }).join('');
+    }
+
+    function selectEvent(idx) {
+      const future = getFutureEvents();
+      future.forEach((_, i) => {
+        const c = document.getElementById('evcard-' + i);
+        if (c) c.classList.toggle('selected', i === idx);
+      });
+      // Pre-fill the Google Form with the selected date
+      if (future[idx] && GOOGLE_FORM_URL !== 'YOUR_GOOGLE_FORM_EMBED_URL') {
+        const label      = encodeURIComponent(future[idx].label);
+        const baseUrl    = GOOGLE_FORM_URL.replace('?embedded=true', '');
+        const prefillUrl = `${baseUrl}?${DATE_ENTRY_ID}=${label}&embedded=true`;
+        const iframe     = document.getElementById('googleFormIframe');
+        if (iframe) iframe.src = prefillUrl;
+      }
+      document.getElementById('register').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function initForm() {
+      const iframe      = document.getElementById('googleFormIframe');
+      const placeholder = document.getElementById('formPlaceholder');
+      const directLink  = document.getElementById('formDirectLink');
+
+      if (GOOGLE_FORM_URL && GOOGLE_FORM_URL !== 'YOUR_GOOGLE_FORM_EMBED_URL') {
+        const future  = getFutureEvents();
+        const anyOpen = future.some(ev => getRegistrationStatus(ev.date) === 'open');
+
+        if (!anyOpen) {
+          placeholder.innerHTML = `
+            <div class="fp-icon">🔒</div>
+            <h3>Registration is Closed</h3>
+            <p>Pre-registration for the next BBQ closed on Wednesday.<br>
+            <strong>Walk-ins are welcome</strong> at the door while supplies last.</p>
+            <p style="margin-top:14px; font-size:0.82rem;">
+              Questions? Email us at
+              <a href="mailto:englewood360@gmail.com">englewood360@gmail.com</a>
+            </p>`;
+          placeholder.style.display = 'block';
+          iframe.style.display = 'none';
+          return;
+        }
+
+        // Pre-fill with the first open event date
+        const firstOpen  = future.find(ev => getRegistrationStatus(ev.date) === 'open');
+        const baseUrl    = GOOGLE_FORM_URL.replace('?embedded=true', '');
+        const prefillUrl = firstOpen
+          ? `${baseUrl}?${DATE_ENTRY_ID}=${encodeURIComponent(firstOpen.label)}&embedded=true`
+          : GOOGLE_FORM_URL;
+
+        directLink.href           = baseUrl;
+        iframe.src                = prefillUrl;
+        iframe.style.display      = 'block';
+        placeholder.style.display = 'none';
+      }
+    }
+
+    buildHeroDetails();
+    buildEventCards();
+    fetchLiveCounts();
+    initForm();
+  </script>
+
+</body>
+</html>
