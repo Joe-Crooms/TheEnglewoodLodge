@@ -214,10 +214,12 @@
     const GOOGLE_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSeJRgaOaURbWlUFXYHxZwKoJZyXv0ErqikgERUtiYb6rYV8MQ/viewform?embedded=true';
 
     // 2. Add or remove BBQ dates (YYYY-MM-DD). Past dates hide automatically.
+    //    price: optional per-event donation amount (defaults to 15 if omitted).
     const BBQ_EVENTS = [
-      { date: '2026-03-22', label: 'Sunday, March 22, 2026' },
-      { date: '2026-04-12', label: 'Sunday, April 12, 2026' },
-      // { date: '2026-05-10', label: 'Sunday, May 10, 2026' },
+      { date: '2026-03-22', label: 'Sunday, March 22, 2026', price: 15 },
+      { date: '2026-04-12', label: 'Sunday, April 12, 2026', price: 15 },
+      { date: '2026-04-26', label: 'Sunday, April 26, 2026', price: 15 },
+      // { date: '2026-05-10', label: 'Sunday, May 10, 2026', price: 15 },
     ];
 
     // 4. Google Form pre-fill entry ID for the Event Date field
@@ -296,12 +298,16 @@
         return;
       }
       const next = future[0];
+      const price = next.price || 15;
       document.getElementById('heroSubDate').textContent = next.label;
+      // Update the hero price starburst
+      const priceEl = document.querySelector('.price-amount');
+      if (priceEl) priceEl.textContent = '$' + price;
       document.getElementById('detailsStrip').innerHTML = `
         <div class="detail-item"><div class="detail-label">Next Date</div><div class="detail-value">${next.label}</div></div>
         <div class="detail-item"><div class="detail-label">Time</div><div class="detail-value">11:30 AM – 1:00 PM</div></div>
         <div class="detail-item"><div class="detail-label">Location</div><div class="detail-value">265 Pine St, Englewood, FL</div></div>
-        <div class="detail-item"><div class="detail-label">Donation</div><div class="detail-value">$15 per Plate</div></div>
+        <div class="detail-item"><div class="detail-label">Donation</div><div class="detail-value">$${price} per Plate</div></div>
       `;
     }
 
@@ -312,6 +318,12 @@
         container.innerHTML = '<p style="color:var(--text-light);font-style:italic;">No upcoming BBQ events scheduled. Check back soon!</p>';
         return;
       }
+      // Check for a ?date= URL param to pre-select a specific event
+      const urlDate = new URLSearchParams(window.location.search).get('date');
+      const defaultIdx = urlDate
+        ? Math.max(0, future.findIndex(ev => ev.date === urlDate))
+        : 0;
+
       container.innerHTML = future.map((ev, i) => {
         const status = getRegistrationStatus(ev.date);
         const isClosed = status === 'closed';
@@ -319,18 +331,20 @@
           ? `<span style="font-family:'Cinzel',serif;font-size:0.65rem;font-weight:700;letter-spacing:0.12em;background:#8b2020;color:white;padding:3px 10px;border-radius:2px;margin-left:8px;">REGISTRATION CLOSED</span>`
           : `<span style="font-family:'Cinzel',serif;font-size:0.65rem;font-weight:700;letter-spacing:0.12em;background:#2d6a2d;color:white;padding:3px 10px;border-radius:2px;margin-left:8px;">OPEN</span>`;
         return `
-        <div class="ev-card ${i===0?'selected':''} ${isClosed?'ev-closed':''}" id="evcard-${i}" onclick="selectEvent(${i})">
+        <div class="ev-card ${i===defaultIdx?'selected':''} ${isClosed?'ev-closed':''}" id="evcard-${i}" onclick="selectEvent(${i})">
           <div class="ev-check"></div>
           <div style="font-size:1.5rem;flex-shrink:0;">📅</div>
           <div style="flex:1;">
             <div class="ev-title" style="${isClosed?'opacity:0.5;':''}">
               ${ev.label}${badge}
             </div>
-            <div class="ev-sub" style="${isClosed?'opacity:0.5;':''}">11:30 AM – 1:00 PM &nbsp;·&nbsp; 265 Pine St, Englewood, FL</div>
+            <div class="ev-sub" style="${isClosed?'opacity:0.5;':''}">11:30 AM – 1:00 PM &nbsp;·&nbsp; 265 Pine St, Englewood, FL &nbsp;·&nbsp; $${ev.price || 15} Donation</div>
             ${isClosed ? `<div style="font-size:0.8rem;color:#8b2020;margin-top:4px;font-style:italic;">Registration closed Wednesday. Walk-ins welcome while supplies last.</div>` : ''}
           </div>
         </div>`;
       }).join('');
+
+      return defaultIdx;
     }
 
     function selectEvent(idx) {
@@ -350,7 +364,7 @@
       document.getElementById('register').scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
-    function initForm() {
+    function initForm(defaultIdx) {
       const iframe      = document.getElementById('googleFormIframe');
       const placeholder = document.getElementById('formPlaceholder');
       const directLink  = document.getElementById('formDirectLink');
@@ -374,11 +388,14 @@
           return;
         }
 
-        // Pre-fill with the first open event date
-        const firstOpen  = future.find(ev => getRegistrationStatus(ev.date) === 'open');
+        // Pre-fill with the URL-selected event if open, otherwise first open event
+        const selected  = future[defaultIdx || 0];
+        const useEvent  = (selected && getRegistrationStatus(selected.date) === 'open')
+          ? selected
+          : future.find(ev => getRegistrationStatus(ev.date) === 'open');
         const baseUrl    = GOOGLE_FORM_URL.replace('?embedded=true', '');
-        const prefillUrl = firstOpen
-          ? `${baseUrl}?${DATE_ENTRY_ID}=${encodeURIComponent(firstOpen.label)}&embedded=true`
+        const prefillUrl = useEvent
+          ? `${baseUrl}?${DATE_ENTRY_ID}=${encodeURIComponent(useEvent.label)}&embedded=true`
           : GOOGLE_FORM_URL;
 
         directLink.href           = baseUrl;
@@ -389,9 +406,9 @@
     }
 
     buildHeroDetails();
-    buildEventCards();
+    const selectedIdx = buildEventCards();
     fetchLiveCounts();
-    initForm();
+    initForm(selectedIdx);
   </script>
 
 </body>
