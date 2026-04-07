@@ -595,6 +595,14 @@
       .reg-panel { display: block !important; }
     }
   </style>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-F3CZT9TFQS"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-F3CZT9TFQS');
+  </script>
 </head>
 <body>
 
@@ -848,7 +856,7 @@
       <p><strong>Mail to:</strong> 9442 Casa Grande Ave, Englewood, FL 34224-8007</p>
       <p style="margin-top:10px;"><strong>Contact:</strong> Denis Doome &nbsp;·&nbsp;
         <a href="tel:9418301249">941-830-1249</a> &nbsp;·&nbsp;
-        <a href="mailto:claysforvets@gmail.com">claysforvets&#64;gmail.com</a>
+        <a href="/cdn-cgi/l/email-protection#b1d2ddd0c8c2d7dec3c7d4c5c2f1d6dcd0d8dd9fd2dedc">claysforvets&#64;gmail.com</a>
       </p>
 
       <div style="margin-top:24px; padding-top:20px; border-top:1px solid var(--border); text-align:center;">
@@ -859,7 +867,7 @@
         </a>
         <p style="font-family:'Cinzel',serif; font-size:0.68rem; letter-spacing:0.12em; color:var(--text-light); margin-bottom:12px;">— or scan to pay —</p>
         <div id="qrcode" style="display:flex; justify-content:center; margin:0 auto;"></div>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+        <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
         <script>
           new QRCode(document.getElementById('qrcode'), {
             text: 'https://link.clover.com/urlshortener/qST8g7',
@@ -927,7 +935,4 @@
         body += 'Sponsor: ' + (spname || '—') + '\n';
         body += 'Contact: ' + (contact || '—') + '\n';
         body += 'Phone: ' + (phone || '—') + '\n\n';
-        let shooters = '';
-        ['sp-s1','sp-s2','sp-s3','sp-s4'].forEach((id, i) => {
-          const v = document.getElementById(id).value.trim();
-          if (
+        let s
