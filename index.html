@@ -567,12 +567,18 @@
   <!-- HERO -->
   <header class="hero">
     <div class="hero-emblem fade-in">
-      <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <line x1="50" y1="18" x2="22" y2="78" stroke="#c8a84b" stroke-width="5" stroke-linecap="round"/>
-        <line x1="50" y1="18" x2="78" y2="78" stroke="#c8a84b" stroke-width="5" stroke-linecap="round"/>
-        <path d="M30 62 Q50 78 70 62" stroke="#c8a84b" stroke-width="3" fill="none" stroke-linecap="round"/>
-        <polyline points="20,48 20,82 54,82" stroke="#c8a84b" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-        <text x="50" y="54" text-anchor="middle" dominant-baseline="middle" fill="#c8a84b" font-family="Cinzel,serif" font-size="20" font-weight="700">G</text>
+      <svg viewBox="0 0 200 210" width="80" height="84" xmlns="http://www.w3.org/2000/svg">
+        <!-- Compass left leg -->
+        <path d="M 93,14 C 88,10 80,13 80,20 L 22,178 L 30,182 L 100,30 Z" fill="#c8a84b"/>
+        <!-- Compass right leg -->
+        <path d="M 107,14 C 112,10 120,13 120,20 L 178,182 L 170,178 L 100,30 Z" fill="#c8a84b"/>
+        <!-- Rounded cap -->
+        <ellipse cx="100" cy="17" rx="9" ry="7" fill="#c8a84b"/>
+        <!-- Square: 90° angle, longer arms -->
+        <line x1="100" y1="158" x2="34" y2="92" stroke="#c8a84b" stroke-width="14" stroke-linecap="square"/>
+        <line x1="100" y1="158" x2="166" y2="92" stroke="#c8a84b" stroke-width="14" stroke-linecap="square"/>
+        <!-- G -->
+        <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#c8a84b" font-family="Cinzel,serif" font-size="50" font-weight="700">G</text>
       </svg>
     </div>
     <h1 class="fade-in d1">Englewood Masonic<br>Lodge No. 360</h1>
@@ -884,40 +890,11 @@
       const pastGrid = document.getElementById('past-grid');
       const pastSection = document.getElementById('past-fundraisers-section');
 
-      // BBQ registration cutoff: 4 days before event (Wednesday for a Sunday event)
-      const BBQ_CUTOFF_DAYS = 4;
-
-      // First pass: find the next upcoming BBQ date
-      const futureBbqDates = [];
       cards.forEach(function(card) {
         const dateStr = card.getAttribute('data-date');
         if (!dateStr) return;
         const parts = dateStr.split('-');
         const cardDate = new Date(parseInt(parts[0]), parseInt(parts[1]) - 1, parseInt(parts[2]));
-        if (card.querySelector('.event-link[href*="chicken-bbq"]') && cardDate >= today) {
-          futureBbqDates.push(dateStr);
-        }
-      });
-      futureBbqDates.sort();
-      const nextBbqDate = futureBbqDates[0] || null;
-
-      // Compute the "opens" date = day after the next BBQ
-      let opensText = '';
-      if (nextBbqDate) {
-        const [y, m, d] = nextBbqDate.split('-').map(Number);
-        const opensDate = new Date(y, m - 1, d);
-        opensDate.setDate(opensDate.getDate() + 1);
-        opensText = opensDate.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
-      }
-
-      // Second pass: process each card
-      cards.forEach(function(card) {
-        const dateStr = card.getAttribute('data-date');
-        if (!dateStr) return;
-        const parts = dateStr.split('-');
-        const cardDate = new Date(parseInt(parts[0]), parseInt(parts[1]) - 1, parseInt(parts[2]));
-
-        // Remove past cards (move fundraisers to archive)
         if (cardDate < today) {
           if (card.getAttribute('data-fundraiser') === '1') {
             const pastCard = card.cloneNode(true);
@@ -926,24 +903,6 @@
             pastSection.style.display = 'block';
           }
           card.remove();
-          return;
-        }
-
-        const bbqLink = card.querySelector('.event-link[href*="chicken-bbq"]');
-        if (!bbqLink) return;
-
-        if (dateStr === nextBbqDate) {
-          // Next BBQ: check if registration is still open
-          const [ny, nm, nd] = dateStr.split('-').map(Number);
-          const cutoff = new Date(ny, nm - 1, nd);
-          cutoff.setDate(cutoff.getDate() - BBQ_CUTOFF_DAYS);
-          if (today > cutoff) {
-            bbqLink.outerHTML = '<p style="margin-top:10px; font-size:0.8rem; color:#8b2020; font-style:italic;">Registration closed. Walk-ins welcome while supplies last.</p>';
-          }
-          // else: leave button as-is (open)
-        } else {
-          // Future BBQ: show "opens" note instead of button
-          bbqLink.outerHTML = '<p style="margin-top:10px; font-size:0.8rem; color:var(--text-light); font-style:italic;">Pre-registration opens ' + opensText + '.</p>';
         }
       });
     });
