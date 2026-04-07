@@ -263,10 +263,10 @@
         const res  = await fetch(COUNT_URL);
         const data = await res.json();
 
-        // Build a card for each future event
-        grid.innerHTML = future.map(ev => {
-          const counts = data[ev.label] || { registrations: 0, plates: 0 };
-          return `
+        // Only show count for the next upcoming event
+        const ev = future[0];
+        const counts = data[ev.label] || { registrations: 0, plates: 0 };
+        grid.innerHTML = `
             <div style="background:rgba(255,255,255,0.07); border-radius:4px; padding:14px 16px; text-align:center;">
               <div style="font-family:'Cinzel',serif; font-size:0.7rem; color:#c8a84b; letter-spacing:0.1em; margin-bottom:8px; line-height:1.4;">${ev.label}</div>
               <div style="display:flex; justify-content:center; gap:20px;">
@@ -281,7 +281,6 @@
                 </div>
               </div>
             </div>`;
-        }).join('');
 
         wrap.style.display = 'block';
       } catch(err) {
@@ -324,22 +323,42 @@
         ? Math.max(0, future.findIndex(ev => ev.date === urlDate))
         : 0;
 
+      // Compute the day after the first (next) upcoming event — pre-reg opens then for later events
+      const nextEventDate = future.length ? (() => {
+        const [y,m,d] = future[0].date.split('-').map(Number);
+        const dt = new Date(y, m-1, d);
+        dt.setDate(dt.getDate() + 1);
+        return dt.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+      })() : '';
+
       container.innerHTML = future.map((ev, i) => {
-        const status = getRegistrationStatus(ev.date);
+        const isNext = i === 0;
+        const status = isNext ? getRegistrationStatus(ev.date) : 'not-yet';
         const isClosed = status === 'closed';
-        const badge = isClosed
-          ? `<span style="font-family:'Cinzel',serif;font-size:0.65rem;font-weight:700;letter-spacing:0.12em;background:#8b2020;color:white;padding:3px 10px;border-radius:2px;margin-left:8px;">REGISTRATION CLOSED</span>`
-          : `<span style="font-family:'Cinzel',serif;font-size:0.65rem;font-weight:700;letter-spacing:0.12em;background:#2d6a2d;color:white;padding:3px 10px;border-radius:2px;margin-left:8px;">OPEN</span>`;
+
+        let badge, subNote;
+        if (!isNext) {
+          badge = `<span style="font-family:'Cinzel',serif;font-size:0.65rem;font-weight:700;letter-spacing:0.12em;background:#5a5a5a;color:white;padding:3px 10px;border-radius:2px;margin-left:8px;">REGISTRATION NOT YET OPEN</span>`;
+          subNote = `<div style="font-size:0.8rem;color:var(--text-light);margin-top:4px;font-style:italic;">Pre-registration opens ${nextEventDate}.</div>`;
+        } else if (isClosed) {
+          badge = `<span style="font-family:'Cinzel',serif;font-size:0.65rem;font-weight:700;letter-spacing:0.12em;background:#8b2020;color:white;padding:3px 10px;border-radius:2px;margin-left:8px;">REGISTRATION CLOSED</span>`;
+          subNote = `<div style="font-size:0.8rem;color:#8b2020;margin-top:4px;font-style:italic;">Registration closed Wednesday. Walk-ins welcome while supplies last.</div>`;
+        } else {
+          badge = `<span style="font-family:'Cinzel',serif;font-size:0.65rem;font-weight:700;letter-spacing:0.12em;background:#2d6a2d;color:white;padding:3px 10px;border-radius:2px;margin-left:8px;">OPEN</span>`;
+          subNote = '';
+        }
+
+        const dimmed = !isNext || isClosed;
         return `
-        <div class="ev-card ${i===defaultIdx?'selected':''} ${isClosed?'ev-closed':''}" id="evcard-${i}" onclick="selectEvent(${i})">
+        <div class="ev-card ${i===defaultIdx?'selected':''} ${(isClosed||!isNext)?'ev-closed':''}" id="evcard-${i}" onclick="${isNext && !isClosed ? `selectEvent(${i})` : ''}">
           <div class="ev-check"></div>
-          <div style="font-size:1.5rem;flex-shrink:0;">📅</div>
+          <div style="font-size:1.5rem;flex-shrink:0;${dimmed?'opacity:0.5;':''}">📅</div>
           <div style="flex:1;">
-            <div class="ev-title" style="${isClosed?'opacity:0.5;':''}">
+            <div class="ev-title" style="${dimmed?'opacity:0.5;':''}">
               ${ev.label}${badge}
             </div>
-            <div class="ev-sub" style="${isClosed?'opacity:0.5;':''}">11:30 AM – 1:00 PM &nbsp;·&nbsp; 265 Pine St, Englewood, FL &nbsp;·&nbsp; $${ev.price || 15} Donation</div>
-            ${isClosed ? `<div style="font-size:0.8rem;color:#8b2020;margin-top:4px;font-style:italic;">Registration closed Wednesday. Walk-ins welcome while supplies last.</div>` : ''}
+            <div class="ev-sub" style="${dimmed?'opacity:0.5;':''}">11:30 AM – 1:00 PM &nbsp;·&nbsp; 265 Pine St, Englewood, FL &nbsp;·&nbsp; $${ev.price || 15} Donation</div>
+            ${subNote}
           </div>
         </div>`;
       }).join('');
@@ -388,11 +407,11 @@
           return;
         }
 
-        // Pre-fill with the URL-selected event if open, otherwise first open event
-        const selected  = future[defaultIdx || 0];
+        // Only allow registration for the very next upcoming event
+        const selected  = future[0];
         const useEvent  = (selected && getRegistrationStatus(selected.date) === 'open')
           ? selected
-          : future.find(ev => getRegistrationStatus(ev.date) === 'open');
+          : null;
         const baseUrl    = GOOGLE_FORM_URL.replace('?embedded=true', '');
         const prefillUrl = useEvent
           ? `${baseUrl}?${DATE_ENTRY_ID}=${encodeURIComponent(useEvent.label)}&embedded=true`

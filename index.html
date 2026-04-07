@@ -884,11 +884,40 @@
       const pastGrid = document.getElementById('past-grid');
       const pastSection = document.getElementById('past-fundraisers-section');
 
+      // BBQ registration cutoff: 4 days before event (Wednesday for a Sunday event)
+      const BBQ_CUTOFF_DAYS = 4;
+
+      // First pass: find the next upcoming BBQ date
+      const futureBbqDates = [];
       cards.forEach(function(card) {
         const dateStr = card.getAttribute('data-date');
         if (!dateStr) return;
         const parts = dateStr.split('-');
         const cardDate = new Date(parseInt(parts[0]), parseInt(parts[1]) - 1, parseInt(parts[2]));
+        if (card.querySelector('.event-link[href*="chicken-bbq"]') && cardDate >= today) {
+          futureBbqDates.push(dateStr);
+        }
+      });
+      futureBbqDates.sort();
+      const nextBbqDate = futureBbqDates[0] || null;
+
+      // Compute the "opens" date = day after the next BBQ
+      let opensText = '';
+      if (nextBbqDate) {
+        const [y, m, d] = nextBbqDate.split('-').map(Number);
+        const opensDate = new Date(y, m - 1, d);
+        opensDate.setDate(opensDate.getDate() + 1);
+        opensText = opensDate.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+      }
+
+      // Second pass: process each card
+      cards.forEach(function(card) {
+        const dateStr = card.getAttribute('data-date');
+        if (!dateStr) return;
+        const parts = dateStr.split('-');
+        const cardDate = new Date(parseInt(parts[0]), parseInt(parts[1]) - 1, parseInt(parts[2]));
+
+        // Remove past cards (move fundraisers to archive)
         if (cardDate < today) {
           if (card.getAttribute('data-fundraiser') === '1') {
             const pastCard = card.cloneNode(true);
@@ -897,6 +926,24 @@
             pastSection.style.display = 'block';
           }
           card.remove();
+          return;
+        }
+
+        const bbqLink = card.querySelector('.event-link[href*="chicken-bbq"]');
+        if (!bbqLink) return;
+
+        if (dateStr === nextBbqDate) {
+          // Next BBQ: check if registration is still open
+          const [ny, nm, nd] = dateStr.split('-').map(Number);
+          const cutoff = new Date(ny, nm - 1, nd);
+          cutoff.setDate(cutoff.getDate() - BBQ_CUTOFF_DAYS);
+          if (today > cutoff) {
+            bbqLink.outerHTML = '<p style="margin-top:10px; font-size:0.8rem; color:#8b2020; font-style:italic;">Registration closed. Walk-ins welcome while supplies last.</p>';
+          }
+          // else: leave button as-is (open)
+        } else {
+          // Future BBQ: show "opens" note instead of button
+          bbqLink.outerHTML = '<p style="margin-top:10px; font-size:0.8rem; color:var(--text-light); font-style:italic;">Pre-registration opens ' + opensText + '.</p>';
         }
       });
     });
