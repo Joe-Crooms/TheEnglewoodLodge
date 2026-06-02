@@ -228,6 +228,7 @@
       { date: '2026-04-12', label: 'Sunday, April 12, 2026', price: 15 },
       { date: '2026-04-26', label: 'Sunday, April 26, 2026', price: 15 },
       { date: '2026-05-10', label: 'Sunday, May 10, 2026', price: 15 },
+      { date: '2026-06-06', label: 'Saturday, June 6, 2026', price: 15 },
     ];
 
     // 4. Google Form pre-fill entry ID for the Event Date field
@@ -350,7 +351,7 @@
           subNote = `<div style="font-size:0.8rem;color:var(--text-light);margin-top:4px;font-style:italic;">Pre-registration opens ${nextEventDate}.</div>`;
         } else if (isClosed) {
           badge = `<span style="font-family:'Cinzel',serif;font-size:0.65rem;font-weight:700;letter-spacing:0.12em;background:#8b2020;color:white;padding:3px 10px;border-radius:2px;margin-left:8px;">REGISTRATION CLOSED</span>`;
-          subNote = `<div style="font-size:0.8rem;color:#8b2020;margin-top:4px;font-style:italic;">Registration closed Wednesday. Walk-ins welcome while supplies last.</div>`;
+          subNote = `<div style="font-size:0.8rem;color:#8b2020;margin-top:4px;font-style:italic;">Registration closed. Walk-ins welcome while supplies last.</div>`;
         } else {
           badge = `<span style="font-family:'Cinzel',serif;font-size:0.65rem;font-weight:700;letter-spacing:0.12em;background:#2d6a2d;color:white;padding:3px 10px;border-radius:2px;margin-left:8px;">OPEN</span>`;
           subNote = '';
@@ -404,7 +405,7 @@
           placeholder.innerHTML = `
             <div class="fp-icon">🔒</div>
             <h3>Registration is Closed</h3>
-            <p>Pre-registration for the next BBQ closed on Wednesday.<br>
+            <p>Pre-registration for the next BBQ is closed.<br>
             <strong>Walk-ins are welcome</strong> at the door while supplies last.</p>
             <p style="margin-top:14px; font-size:0.82rem;">
               Questions? Email us at
