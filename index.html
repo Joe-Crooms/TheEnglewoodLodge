@@ -536,6 +536,92 @@
     .past-card .event-time, .past-card .event-note { color: #888; }
     .past-card .event-link { background: #555; color: #ccc; }
     #past-fundraisers-section { display: none; }
+
+    /* ── SCHOLARSHIP ── */
+    .scholarship-bg {
+      background: var(--cream);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .scholarship-announcement {
+      background: var(--navy);
+      border-radius: 8px;
+      padding: 32px;
+      margin-top: 8px;
+    }
+    .announcement-title {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(1.1rem, 4vw, 1.45rem);
+      font-weight: 700;
+      color: var(--gold);
+      margin-bottom: 12px;
+      line-height: 1.2;
+    }
+    .announcement-raised {
+      display: inline-block;
+      font-family: 'Cinzel', serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--navy);
+      background: var(--gold);
+      padding: 6px 14px;
+      border-radius: 3px;
+      margin-bottom: 14px;
+    }
+    .announcement-intro {
+      color: rgba(245,240,232,0.8);
+      line-height: 1.8;
+      font-size: 0.95rem;
+      max-width: 680px;
+      margin-bottom: 24px;
+    }
+    .recipient-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 14px;
+      margin-bottom: 22px;
+    }
+    @media (max-width: 480px) { .recipient-grid { grid-template-columns: 1fr; } }
+    .recipient-card {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(200,168,75,0.25);
+      border-top: 3px solid var(--gold);
+      border-radius: 6px;
+      padding: 18px;
+    }
+    .recipient-school {
+      font-family: 'Cinzel', serif;
+      font-size: 0.63rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      color: var(--gold);
+      opacity: 0.8;
+      margin-bottom: 7px;
+      text-transform: uppercase;
+    }
+    .recipient-name {
+      font-family: 'Cinzel', serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--cream);
+      margin-bottom: 7px;
+    }
+    .recipient-program {
+      font-size: 0.87rem;
+      color: rgba(245,240,232,0.62);
+      font-style: italic;
+      line-height: 1.5;
+    }
+    .recipient-amount {
+      font-family: 'Cinzel', serif;
+      font-size: 0.88rem;
+      color: var(--gold);
+      text-align: center;
+      padding-top: 16px;
+      border-top: 1px solid rgba(200,168,75,0.22);
+      letter-spacing: 0.03em;
+    }
   </style>
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-F3CZT9TFQS"></script>
@@ -554,6 +640,7 @@
       <a href="#" class="nav-logo">Englewood Lodge No. 360</a>
       <ul class="nav-links">
         <li><a href="#about">About</a></li>
+        <li><a href="#scholarship">Scholarship</a></li>
         <li><a href="#events">Events</a></li>
         <li><a href="#officers">Officers</a></li>
         <li><a href="#what-is-a-mason">What is a Mason?</a></li>
@@ -565,6 +652,7 @@
     </div>
     <div class="mobile-menu" id="mobileMenu">
       <a href="#about"           onclick="closeMenu()">About the Lodge</a>
+      <a href="#scholarship"     onclick="closeMenu()">Scholarship Foundation</a>
       <a href="#events"          onclick="closeMenu()">Upcoming Events</a>
       <a href="#officers"        onclick="closeMenu()">2026 Officers</a>
       <a href="#what-is-a-mason" onclick="closeMenu()">What is a Mason?</a>
@@ -616,6 +704,51 @@
       <a href="#contact" class="btn btn-gold">Get in Touch</a>
     </div>
   </section>
+
+  <!-- SCHOLARSHIP FOUNDATION -->
+  <div class="scholarship-bg">
+    <section id="scholarship">
+      <div class="section-label">Community</div>
+      <h2>Scholarship Foundation</h2>
+      <div class="section-rule"></div>
+      <div class="about-text" style="max-width:720px; margin-bottom:32px;">
+        <p>The <strong>Englewood Masonic Lodge No. 360 Scholarship Foundation</strong>, established in January 2026, raises funds to provide scholarships to graduating seniors at <strong>Lemon Bay High School</strong>, <strong>North Port High School</strong>, and <strong>Wellan Park High School</strong> who plan to attend a trade school, vocational or technical school, nursing program at a community college, or fire and police academies.</p>
+        <p>All applications are reviewed anonymously — no name, race, or gender is included — with each application identified only by a code provided by the school's guidance counselor. Scholarships are awarded each Spring, with the number and amount determined by funds raised during the prior year. The Scholarship Committee brings its recommendations before an open lodge, which makes the final decision.</p>
+        <p>The Foundation holds two <strong>Brunswick Stew</strong> fundraisers annually — one in late October and another in late February — with all proceeds going directly to students. As a 501(c) organization, all donations are fully tax-deductible; the lodge retains none of the funds for operating expenses and maintains a separate bank account for all scholarship funds. Donations from brothers, friends of the lodge, and partner organizations are encouraged.</p>
+      </div>
+
+      <!-- 2026 Recipients Announcement -->
+      <div class="scholarship-announcement">
+        <div class="section-label" style="color:rgba(200,168,75,0.7); margin-bottom:6px;">2026 Academic Year</div>
+        <h3 class="announcement-title">Congratulations to Our Scholarship Recipients</h3>
+        <div class="announcement-raised">Over $11,800 Raised</div>
+        <p class="announcement-intro">Through one Brunswick Stew sale and generous donations from brothers, friends of the lodge, and the <strong style="color:var(--cream);">Englewood Methodist Church Men</strong>, the Foundation is proud to announce four scholarship recipients for the 2026 academic year.</p>
+        <div class="recipient-grid">
+          <div class="recipient-card">
+            <div class="recipient-school">Lemon Bay High School</div>
+            <div class="recipient-name">Jade Gorsky</div>
+            <div class="recipient-program">Englewood Fire Academy<br>Certified EMT &amp; Firefighter</div>
+          </div>
+          <div class="recipient-card">
+            <div class="recipient-school">North Port High School</div>
+            <div class="recipient-name">Naima Metayer</div>
+            <div class="recipient-program">Florida Southwestern State College, Punta Gorda<br>Nursing</div>
+          </div>
+          <div class="recipient-card">
+            <div class="recipient-school">North Port High School</div>
+            <div class="recipient-name">Iryna Brazhnyk</div>
+            <div class="recipient-program">State College of Florida<br>Dental Hygiene</div>
+          </div>
+          <div class="recipient-card">
+            <div class="recipient-school">North Port High School</div>
+            <div class="recipient-name">Karla Valentin-Martinez</div>
+            <div class="recipient-program">State College of Florida<br>Nursing</div>
+          </div>
+        </div>
+        <p class="recipient-amount">Each recipient receives a <strong>$2,500 scholarship</strong> for the 2026–27 academic year.</p>
+      </div>
+    </section>
+  </div>
 
   <!-- EVENTS -->
   <div class="events-bg">
